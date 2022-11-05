@@ -81,9 +81,9 @@ class Contact(models.Model):
     def __str__(self):
         if self.title and self.name:
             return f'Point of contact: {self.name}, {self.title}.'
-        elif not self.name:
+        elif self.title and not self.name:
             return f'Point of contact: {self.title}.'
-        elif not self.title:
+        elif self.name and not self.title:
             return f'Point of contact: {self.name}.'
         else:
             return f'No Point of Contact found!"'
