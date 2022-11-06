@@ -1,11 +1,14 @@
 from django.urls import path
-
+from django.views.generic import TemplateView
 from . import views
+app_name = 'main_app'
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('about/', views.about, name='about'),
-    # path('cards/', views.cards_index, name='index'),
-    # path('cards/<int:card_id>/', views.cards_detail, name='detail'),
-    # path('cards/create/', views.CardCreate.as_view(), name='cards_create')
+    path('', views.Landing.as_view(), name='landing'),
+    path('home/', views.Home.as_view(), name='home'),
+    path('applications/', views.Applications.as_view(), name='applications'),
+    # path('applications/', views.applications_index, name='index'),
+    # path('users/<int:user_id>/', views.users_profile, name='applications'),
+    # path('applications/<int:application_id>/', views.applications_detail, name='detail'),
+    # path('applications/create/', views.applicationCreate.as_view(), name='applications_create')
 ]

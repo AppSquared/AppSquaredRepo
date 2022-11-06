@@ -18,33 +18,33 @@ class User(models.Model):
 
 class Application(models.Model):
 
+    # name = models.SlugField()
+    link = models.CharField(max_length=100)
     date_applied = models.DateField()
-    application_link = models.CharField(max_length=100)
+    logged = models.DateTimeField(auto_now_add=True)
 
     APPLIED = 'A'
     INTERVIEWED = 'I'
     REJECTED = 'R'
-    APPLICATION_STATUS_CHOICES = [
+    STATUS_CHOICES = [
         (APPLIED, 'Applied'),
         (INTERVIEWED, 'Interviewed'),
         (REJECTED, 'Rejected')
     ]
 
-    application_status = models.CharField(
+    status = models.CharField(
         max_length=1,
-        choices=APPLICATION_STATUS_CHOICES,
-        default=APPLICATION_STATUS_CHOICES[0][0]
+        choices=STATUS_CHOICES,
+        default=STATUS_CHOICES[0][0]
     )
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Current status for the position of {self.job_title}: {self.get_status_display()}.\n You applied on {self.date_applied}.\n "
-
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+        return f"Current status: {self.get_status_display()}.\n You applied on {self.date_applied}.\n "
 
     class Meta:
-        ordering = 'date'
+        ordering = ['logged']
 
 
 class Company(models.Model):
