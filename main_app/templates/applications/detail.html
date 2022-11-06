@@ -2,4 +2,12 @@
 
 <h1>Application Details</h1>
 
+<p>Logged on: {{ application.logged }}</p>
+
+<a href="{% url 'main_app:application_update' application.pk %}"
+	>Edit This App</a
+>
+<a href="{% url 'main_app:application_delete' application.pk %}"
+	>Delete This App</a
+>
 {% endblock %}

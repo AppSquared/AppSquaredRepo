@@ -1,5 +1,9 @@
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import DetailView
+from django.urls import reverse
+
 
 from .models import Application, User
 from .forms import ApplicationForm
@@ -13,32 +17,42 @@ class Landing(TemplateView):
 class Home(TemplateView):
     template_name = 'main_app/home.html'
 
-# ::DUMMY APPS FOR TESTING PURPOSES::
-# :: DELETE THIS WHEN DB IS ACCESSIBLE FOR EVERYONE::
-
-
-# class Application:
-#     def __init__(self, link, date_applied, logged):
-#         self.link = link,
-#         self.date_applied = date_applied
-#         self.logged = logged
-
-
-# dummyAppList = [
-#     Application("http://www.google.com", "2022-11-03", "today"),
-#     Application("http://www.github.com", "2022-10-13",
-#                 "10,000 years in the future"),
-#     Application("http://www.amazon.com", "2022-12-23", "every christmas past"),
-# ]
-
-
-class Applications(TemplateView):
-    template_name = 'applications/index.html'
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # context['applications'] = Application.objects.all()
-        # return context
+        context['applications'] = Application.objects.all()
+
+        return context
+
+
+class Detail(DetailView):
+    model = Application
+    template_name = 'applications/detail.html'
+
+
+class ApplicationCreate(CreateView):
+    model = Application
+    fields = ['link', 'date_applied', 'status']
+    template_name = "applications/new.html"
+    success_url = "/home/"
+
+    # def get_success_url(self):
+    #     return reverse('main_app:home')
+
+
+class ApplicationUpdate(UpdateView):
+    model = Application
+    fields = ['link', 'date_applied', 'status']
+    template_name = "applications/update.html"
+    success_url = "/applications/"
+
+    def get_success_url(self):
+        return reverse('main_app:detail', kwargs={'pk': self.object.pk})
+
+
+class ApplicationDelete(DeleteView):
+    model = Application
+    template_name = "applications/delete.html"
+    success_url = "/home/"
 
 
 # def users_profile(request, user_id):

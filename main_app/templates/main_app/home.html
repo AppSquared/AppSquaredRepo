@@ -1,6 +1,27 @@
 {% extends 'main_app/base.html' %} {% block content %}
 <hr />
-<h1>Home Page</h1>
-<h2>(What user sees once connected)</h2>
+<div class="feed-container">
+	<h2>My Feed</h2>
+	<div class="drop-down-container">
+		<label for="filtering">Filter By:</label>
+		<select class="drop-down" type="sort-by">
+			<option id="1" value="{{ self.date_applied }}">Date applied</option>
+			<option id="2" value="{{ self.logged }}">Date logged</option>
+			<option id="3" value="{{ self.status }}">Current Status</option>
+		</select>
+	</div>
+	<div>
+		<a href="{% url 'main_app:application_create' %}">New Application</a>
+	</div>
+	{% for application in applications %}
+	<div class="feed-item">
+		<span class="date-applied">{{ application.link }}</span>
+		<span class="date-applied">{{ application.date_applied }}</span>
+		<span class="date-applied">{{ application.logged }}</span>
+		<span class="date-applied">{{ application.status }}</span>
+		<a href="{% url 'main_app:detail' application.pk %}">View This App</a>
+	</div>
+	{% endfor %}
+</div>
 <hr />
 {% endblock %}
