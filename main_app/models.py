@@ -1,28 +1,18 @@
 from django.db import models
 from django.urls import reverse
+from datetime import date
+from django.contrib.auth.models import User
 
 # Create your models here.
 
 
-class User(models.Model):
-    email: models.EmailField(max_length=100)
-    username: models.SlugField(max_length=20)
-    password: models.SlugField(max_length=20)
-
-    def __str__(self):
-        return self.username
-
-    def get_absolute_url(self):
-        return reverse('trough', kwargs={'user_id': self.id})
-
-
 class Application(models.Model):
 
-    # name = models.SlugField()
+    date = models.DateField()
     link = models.CharField(max_length=100)
-    date_applied = models.DateField()
     logged = models.DateTimeField(auto_now_add=True)
     notes = models.TextField(max_length=250).blank = True
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     APPLIED = 'A'
     INTERVIEWED = 'I'
@@ -39,13 +29,14 @@ class Application(models.Model):
         default=STATUS_CHOICES[0][0]
     )
 
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
-
     def __str__(self):
         return f"Current status: {self.get_status_display()}.\n You applied on {self.date_applied}.\n "
 
-    class Meta:
-        ordering = ['logged']
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'application_id': self.id})
+
+    # class Meta:
+    #     ordering = ['logged']
 
 
 class Company(models.Model):
