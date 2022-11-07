@@ -6,8 +6,8 @@ from django.urls import reverse
 
 class User(models.Model):
     email: models.EmailField(max_length=100)
-    username: models.CharField(max_length=100)
-    password: models.CharField(max_length=100)
+    username: models.SlugField(max_length=20)
+    password: models.SlugField(max_length=20)
 
     def __str__(self):
         return self.username
@@ -22,6 +22,7 @@ class Application(models.Model):
     link = models.CharField(max_length=100)
     date_applied = models.DateField()
     logged = models.DateTimeField(auto_now_add=True)
+    notes = models.TextField(max_length=250).blank = True
 
     APPLIED = 'A'
     INTERVIEWED = 'I'
