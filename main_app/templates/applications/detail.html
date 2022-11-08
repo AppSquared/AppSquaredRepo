@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Application Details</h1>
+<div class="Deetz">
+	<p>Created on: {{ application.logged }}</p>
+	<p>Applied on: {{ application.date }}</p>
+	<p>Link to application/posting: {{ application.link }}</p>
+	<p>Application Status: {{ application.status }}</p>
+</div>
+<div class="crud-options">
+	<a href="{% url 'applications_update' application.id %}">Edit This App</a>
+	<a href="{% url 'applications_delete' application.id %}">Delete This App</a>
+	<a href="{% url 'home' %}">Home</a>
+</div>
+{% endblock %}
