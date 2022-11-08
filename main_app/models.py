@@ -1,6 +1,5 @@
 from django.db import models
 from django.urls import reverse
-from datetime import date
 from django.contrib.auth.models import User
 
 # Create your models here.
@@ -11,8 +10,8 @@ class Application(models.Model):
     date = models.DateField()
     link = models.CharField(max_length=100)
     logged = models.DateTimeField(auto_now_add=True)
+    notes = models.TextField(max_length=250)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    notes = models.TextField(max_length=250).blank = True
 
     APPLIED = 'A'
     INTERVIEWED = 'I'
@@ -30,7 +29,7 @@ class Application(models.Model):
     )
 
     def __str__(self):
-        return f"Current status: {self.get_status_display()}.\n You applied on {self.date_applied}.\n "
+        return f"Current status: {self.get_status_display()}.\n You applied on {self.date}.\n "
 
     def get_absolute_url(self):
         return reverse('detail', kwargs={'application_id': self.id})
