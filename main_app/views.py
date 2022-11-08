@@ -27,7 +27,7 @@ def application_detail(request, application_id):
 
 class ApplicationCreate(LoginRequiredMixin, CreateView):
     model = Application
-    fields = ['link', 'date', 'status', 'notes']
+    fields = ['link', 'date', 'status']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -36,7 +36,7 @@ class ApplicationCreate(LoginRequiredMixin, CreateView):
 
 class ApplicationUpdate(LoginRequiredMixin, UpdateView):
     model = Application
-    fields = ['link', 'date', 'status', 'notes']
+    fields = ['link', 'date', 'status']
 
 
 class ApplicationDelete(LoginRequiredMixin, DeleteView):

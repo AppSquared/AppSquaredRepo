@@ -5,7 +5,7 @@ from .models import Application, User
 class ApplicationForm(ModelForm):
     class Meta:
         model = Application
-        fields = ['link', 'date', 'status', 'notes']
+        fields = ['link', 'date', 'status']
 
 
 class UserForm(ModelForm):
