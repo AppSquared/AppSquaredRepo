@@ -13,9 +13,9 @@ class Application(models.Model):
     # notes = models.TextField(max_length=250).blank = True
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    APPLIED = 'A'
-    INTERVIEWED = 'I'
-    REJECTED = 'R'
+    APPLIED = 'Applied'
+    INTERVIEWED = 'Interviewed'
+    REJECTED = 'Rejected'
     STATUS_CHOICES = [
         (APPLIED, 'Applied'),
         (INTERVIEWED, 'Interviewed'),
@@ -23,7 +23,7 @@ class Application(models.Model):
     ]
 
     status = models.CharField(
-        max_length=1,
+        max_length=15,
         choices=STATUS_CHOICES,
         default=STATUS_CHOICES[0][0]
     )
