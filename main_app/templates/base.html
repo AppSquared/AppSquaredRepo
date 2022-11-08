@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -10,16 +12,29 @@
 		<header>
 			<nav class="navbar" role="navigation" aria-label="main navigation">
 				<a class="navbar-item" href="/">APP SQUARED</a>
-				<a class="navbar-item" href="{% url 'main_app:home' %}">HOME</a>
-				<a class="navbar-item" href="{% url 'main_app:landing' %}">LOGOUT</a>
+				<a href="{% url 'about' %}">ABOUT</a>
+				{% if user.is_authenticated %}
+				<a class="navbar-item" href="{% url 'home' %}">HOME</a>
+				<a class="navbar-item" href="{% url 'logout' %}">LOGOUT</a>
 				<a class="navbar-item" href="/">PROFILE</a>
+				{% else %}
+				<a href="{% url 'signup' %}">Sign Up</a>
+				<a href="{% url 'login' %}">Log In</a>
+				{% endif %}
 			</nav>
 		</header>
 		<main>{% block content %} {% endblock %}</main>
 		<footer>
+			{% if user.is_authenticated %}
 			<a class="footer-item" href="https://www.linkedin.com/">LinkedIn</a>
 			<a class="footer-item" href="https://www.indeed.com/">Indeed</a>
 			<a class="footer-item" href="https://www.gmail.com/">Email</a>
+			{% else %}
+			<span>
+				<a href="{% url 'login' %}">Log in</a> or
+				<a href="{% url 'login' %}">Sign up</a> To Link Up!
+			</span>
+			{% endif %}
 		</footer>
 	</body>
 </html>

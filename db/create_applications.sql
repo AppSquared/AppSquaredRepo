@@ -1,4 +1,4 @@
-INSERT INTO main_app_application(link, date_applied, logged, status, notes)
+INSERT INTO main_app_application(link, date, logged, status, notes)
   VALUES
     (
       "https://docs.djangoproject.com/en/4.1/", 

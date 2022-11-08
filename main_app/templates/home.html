@@ -1,5 +1,6 @@
-{% extends 'main_app/base.html' %} {% block content %}
+{% extends 'base.html' %} {% block content %}
 <hr />
+
 <div class="feed-container">
 	<h2>My Feed</h2>
 	<div class="drop-down-container">
@@ -11,7 +12,7 @@
 		</select>
 	</div>
 	<div>
-		<a href="{% url 'main_app:application_create' %}">New Application</a>
+		<a href="{% url 'applications_create' %}">New Application</a>
 	</div>
 	{% for application in applications %}
 	<div class="feed-item">
@@ -19,7 +20,7 @@
 		<span class="date-applied">{{ application.date_applied }}</span>
 		<span class="date-applied">{{ application.logged }}</span>
 		<span class="date-applied">{{ application.status }}</span>
-		<a href="{% url 'main_app:detail' application.pk %}">View This App</a>
+		<a href="{% url 'detail' application.pk %}">View This App</a>
 	</div>
 	{% endfor %}
 </div>
