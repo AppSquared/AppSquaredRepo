@@ -10,7 +10,7 @@ class Application(models.Model):
     date = models.DateField()
     link = models.CharField(max_length=100)
     logged = models.DateTimeField(auto_now_add=True)
-    notes = models.TextField(max_length=250).blank(True)
+    notes = models.TextField(max_length=250).blank = True
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     APPLIED = 'A'
