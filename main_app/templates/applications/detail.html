@@ -8,7 +8,8 @@
 	<p>Application Status: {{ application.status }}</p>
 </div>
 <div class="crud-options">
-	<a href="{% url 'application_update' application.pk %}">Edit This App</a>
-	<a href="{% url 'application_delete' application.pk %}">Delete This App</a>
+	<a href="{% url 'applications_update' application.id %}">Edit This App</a>
+	<a href="{% url 'applications_delete' application.id %}">Delete This App</a>
+	<a href="{% url 'home' %}">Home</a>
 </div>
 {% endblock %}

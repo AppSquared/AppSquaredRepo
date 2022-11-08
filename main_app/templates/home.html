@@ -20,7 +20,7 @@
 		<span>{{ application.date }}</span>
 		<span>{{ application.logged }}</span>
 		<span>{{ application.status }}</span>
-		<a href="{% url 'detail' application.pk %}">View This App</a>
+		<a href="{% url 'detail' application.id %}">View This App</a>
 	</div>
 	{% endfor %}
 </div>
